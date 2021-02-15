@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- https://www.bootstrapcdn.com/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <title>Car shop</title>
+</head>
+
+<body>
+    <h1>Car Shop</h1>
+    <div id="app">
+        <h2>Get All etc (GET)</h2>
+        <button id="getAllButton" v-on:click="getAllCars" class="btn btn-primary">Get all cars</button>
+        <br />
+        <input v-model="vendorToGetBy" placeholder="vendor" type="text" />
+        <button v-on:click="getByVendor(vendorToGetBy)" class="btn btn-primary">Get by vendor</button>
+
+        <ul id="carlist" v-if="cars.length">
+            <li v-for="car in cars">
+                {{car.id}} {{car.vendor}} : {{car.model }} {{ car.price}}
+            </li>
+        </ul>
+        <div v-else>No cars</div>
+
+        <h2>Get by ID (GET)</h2>
+        <input v-model="idToGetBy" placeholder="id" type="number" />
+        <button v-on:click="getById(idToGetBy)" class="btn btn-primary">Get by id</button>
+        <div v-if="singleCar">
+            {{singleCar.id}} {{singleCar.vendor}} {{ singleCar.model}} {{singleCar.price}}
+        </div>
+        <div v-else>No such car</div>
+
+        <h2>Delete (DELETE)</h2>
+        <input v-model.number="deleteId" placeholder="id" type="number" />
+        <button v-on:click="deleteCar(deleteId)" class="btn btn-warning">Delete</button>
+        {{deleteMessage}}
+
+        <h2>Add (POST)</h2>
+        <input v-model="addData.model" placeholder="model" type="text" />
+        <input v-model="addData.vendor" placeholder="vendor" type="text" />
+        <input v-model.number="addData.price" placeholder="price" type="number" />
+        <button v-on:click="addCar()" class="btn btn-success">Add</button>
+        <div>{{addMessage}}</div>
+
+        <h2>Update (PUT)</h2>
+        <input v-model="updateData.id" placeholder="id" type="number" />
+        <input v-model="updateData.model" placeholder="model" type="text" />
+        <input v-model="updateData.vendor" placeholder="vendor" type="text" />
+        <input v-model.number="updateData.price" placeholder="price" type="number" />
+        <button v-on:click="updateCar()" class="btn btn-success">Update</button>
+        <div>{{updateMessage}}</div>
+    </div>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
