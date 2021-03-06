@@ -66,7 +66,7 @@ Vue.createApp({
         addCar() {
             axios.post(baseUrl, this.addData)
                 .then((response) => {
-                    let message = "response " + response.status + " " + response.statusText
+                    const message = "response " + response.status + " " + response.statusText
                     this.addMessage = message
                     this.getAllCars()
                 })
@@ -77,6 +77,7 @@ Vue.createApp({
         },
         updateCar() {
             let url = baseUrl + "/" + this.updateData.id
+            console.log(this.updateData)
             axios.put(url, this.updateData)
                 .then((response) => {
                     let message = "response " + response.status + " " + response.statusText
