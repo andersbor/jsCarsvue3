@@ -33,7 +33,7 @@ Vue.createApp({
             this.helperGetAndShow(baseUrl)
         },
         getByVendor(vendor) {
-            let url = baseUrl + "?vendor=" + vendor
+            const url = baseUrl + "?vendor=" + vendor
             this.helperGetAndShow(url)
         },
         async helperGetAndShow(url) { // helper metode: getAllCar + getByVendor are very similar
@@ -63,31 +63,24 @@ Vue.createApp({
                 alert(ex.message)
             }
         },
-        addCar() {
-            axios.post(baseUrl, this.addData)
-                .then((response) => {
-                    const message = "response " + response.status + " " + response.statusText
-                    this.addMessage = message
-                    this.getAllCars()
-                })
-                .catch((error) => {
-                    // this.addMessage = error.message
-                    alert(error.message)
-                })
+        async addCar() {
+            try {
+                response = await axios.post(baseUrl, this.addData)
+                this.addMessage = "response " + response.status + " " + response.statusText
+                this.getAllCars()
+            } catch (ex) {
+                alert(ex.message)
+            }
         },
-        updateCar() {
-            let url = baseUrl + "/" + this.updateData.id
-            console.log(this.updateData)
-            axios.put(url, this.updateData)
-                .then((response) => {
-                    let message = "response " + response.status + " " + response.statusText
-                    this.updateMessage = message
-                    this.getAllCars()
-                })
-                .catch((error) => {
-                    // this.addMessage = error.message
-                    alert(error.message)
-                })
+        async updateCar() {
+            const url = baseUrl + "/" + this.updateData.id
+            try {
+                response = await axios.put(url, this.updateData)
+                this.updateMessage = "response " + response.status + " " + response.statusText
+                this.getAllCars()
+            } catch (ex) {
+                alert(ex.message)
+            }
         }
     }
 }).mount("#app")
