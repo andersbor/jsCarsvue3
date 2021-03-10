@@ -17,17 +17,6 @@ Vue.createApp({
             updateMessage: ""
         }
     },
-    async created() { // created() is a life cycle method, not an ordinary method
-        console.log("created method called")
-        try {
-            const response = await axios.get(baseUri)
-            this.posts = await response.data
-            this.error = null
-        } catch (ex) {
-            this.posts = []
-            this.error = ex
-        }
-    },
     methods: {
         getAllCars() {
             this.helperGetAndShow(baseUrl)
