@@ -1,5 +1,5 @@
 // use https (http secure).
-// http (non secure) will make the app complain about mixed content when running the app from Azure
+// http (non-secure) will make the app complain about mixed content when running the app from Azure
 const baseUrl = "https://anbo-restcarswithmanager.azurewebsites.net/api/cars"
 
 Vue.createApp({
@@ -25,7 +25,7 @@ Vue.createApp({
             const url = baseUrl + "?vendor=" + vendor
             this.helperGetAndShow(url)
         },
-        async helperGetAndShow(url) { // helper metode: getAllCar + getByVendor are very similar
+        async helperGetAndShow(url) { // helper metode: getAllCars + getByVendor are very similar
             try {
                 const response = await axios.get(url)
                 this.cars = await response.data
