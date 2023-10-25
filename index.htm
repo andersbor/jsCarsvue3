@@ -18,7 +18,8 @@
         <h2>Get All etc (GET)</h2>
         <button id="getAllButton" v-on:click="getAllCars" class="btn btn-primary">Get all cars</button>
         <br />
-        <input v-model="vendorToGetBy" placeholder="vendor" type="text" />
+        <!-- https://stackoverflow.com/questions/42951967/handling-enter-key-in-vue-js -->
+        <input v-model="vendorToGetBy" placeholder="vendor" type="text" v-on:keyup.enter="getByVendor(vendorToGetBy)" />
         <button v-on:click="getByVendor(vendorToGetBy)" class="btn btn-primary">Get by vendor</button>
 
         <ul id="carlist" v-if="cars.length">
