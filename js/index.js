@@ -19,13 +19,13 @@ Vue.createApp({
     },
     methods: {
         getAllCars() {
-            this.helperGetAndShow(baseUrl)
+            this.getCars(baseUrl)
         },
-        getByVendor(vendor) {
+        getByVendor(vendor) { // filter cars by vendor
             const url = baseUrl + "?vendor=" + vendor
-            this.helperGetAndShow(url)
+            this.getCars(url)
         },
-        async helperGetAndShow(url) { // helper metode: getAllCars + getByVendor are very similar
+        async getCars(url) { // helper method: getAllCars + getByVendor are very similar
             try {
                 const response = await axios.get(url)
                 this.cars = await response.data
