@@ -7,13 +7,13 @@ Vue.createApp({
         return {
             cars: [],
             vendorToGetBy: "",
-            idToGetBy: -1,
+            idToGetBy: null,
             singleCar: null,
-            deleteId: 0,
+            deleteId: null,
             deleteMessage: "",
-            addData: { model: "", vendor: "", price: 0 },
+            addData: { model: "", vendor: "", price: null },
             addMessage: "",
-            updateData: { id: 0, model: "", vendor: "", price: 0 },
+            updateData: { id: null, model: "", vendor: "", price: null },
             updateMessage: ""
         }
     },
@@ -34,15 +34,24 @@ Vue.createApp({
             }
         },
         async getById(id) {
+            if (id === null || id === undefined || isNaN(id) || id <= 0) {
+                alert("Please enter a valid car ID")
+                return
+            }
             const url = baseUrl + "/" + id
             try {
                 const response = await axios.get(url)
                 this.singleCar = await response.data
             } catch (ex) {
+                this.singleCar = null
                 alert(ex.message)
             }
         },
         async deleteCar(deleteId) {
+            if (id === null || id === undefined || isNaN(id) || id <= 0) {
+                alert("Please enter a valid car ID")
+                return
+            }
             const url = baseUrl + "/" + deleteId
             try {
                 response = await axios.delete(url)
@@ -53,6 +62,11 @@ Vue.createApp({
             }
         },
         async addCar() {
+            if (this.addData.model === "" || this.addData.vendor === "" || this.addData.price === null || this.addData.price <= 0) {
+                alert("Please fill in all fields with valid values")
+                return
+            }
+            // TODO more validation (model, vendor, price)
             try {
                 response = await axios.post(baseUrl, this.addData)
                 this.addMessage = "response " + response.status + " " + response.statusText
@@ -62,6 +76,11 @@ Vue.createApp({
             }
         },
         async updateCar() {
+            if (this.updateData.id === null || this.updateData.id === undefined || isNaN(this.updateData.id) || this.updateData.id <= 0) {
+                alert("Please enter a valid car ID")
+                return
+            }
+            // TODO more validation (model, vendor, price)
             const url = baseUrl + "/" + this.updateData.id
             try {
                 response = await axios.put(url, this.updateData)

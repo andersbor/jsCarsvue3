@@ -23,7 +23,7 @@
         <button v-on:click="getByVendor(vendorToGetBy)" class="btn btn-primary">Get by vendor</button>
 
         <ul id="carlist" v-if="cars.length">
-            <li v-for="car in cars">
+            <li v-for="car in cars" :key="car.id">
                 {{car.id}} {{car.vendor}} : {{car.model }} {{ car.price}}
             </li>
         </ul>
